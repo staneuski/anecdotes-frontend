@@ -1,16 +1,27 @@
-import { useSelector, useDispatch } from 'react-redux'
+import AnecdoteForm from './components/AnecdoteForm'
+import Notification from './components/Notification'
 
 const App = () => {
-  const anecdotes = useSelector(state => state)
-  const dispatch = useDispatch()
 
-  const vote = (id) => {
-    console.log('vote', id)
+  const handleVote = (anecdote) => {
+    console.log('vote')
   }
+
+  const anecdotes = [
+    {
+      "content": "If it hurts, do it more often",
+      "id": "47145",
+      "votes": 0
+    },
+  ]
 
   return (
     <div>
-      <h2>Anecdotes</h2>
+      <h3>Anecdote app</h3>
+    
+      <Notification />
+      <AnecdoteForm />
+    
       {anecdotes.map(anecdote =>
         <div key={anecdote.id}>
           <div>
@@ -18,15 +29,10 @@ const App = () => {
           </div>
           <div>
             has {anecdote.votes}
-            <button onClick={() => vote(anecdote.id)}>vote</button>
+            <button onClick={() => handleVote(anecdote)}>vote</button>
           </div>
         </div>
       )}
-      <h2>create new</h2>
-      <form>
-        <div><input /></div>
-        <button>create</button>
-      </form>
     </div>
   )
 }
