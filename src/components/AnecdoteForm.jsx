@@ -14,6 +14,9 @@ const AnecdoteForm = () => {
     mutationFn: createAnecdote,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['anecdotes'] })
+    },
+    onError: () => {
+      setNotification(dispatch, 'too short anecdote, must have length 5 or more', 5)
     }
   })
   const addAnecdote = async (event) => {
