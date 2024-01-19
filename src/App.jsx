@@ -14,7 +14,7 @@ const App = () => {
   const updateAnecdoteMutation = useMutation({
     mutationFn: updateAnecdote,
     onSuccess: (updatedAnecdote) => {
-      console.log(updatedAnecdote)
+      // console.log(updatedAnecdote)
       queryClient.invalidateQueries({ queryKey: ['anecdotes'] })
     }
   })
@@ -46,7 +46,7 @@ const App = () => {
           <Anecdote
             key={anecdote.id}
             anecdote={anecdote}
-            handleClick={() => handleVote(anecdote)}
+            handleVote={handleVote}
           />
         )}
     </div>
