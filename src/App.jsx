@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import { Routes, Route, useMatch } from 'react-router-dom'
 
+import { useNotification } from './hooks'
+
 import About from './components/About'
 import Anecdote from './components/Anecdote'
 import AnecdoteForm from './components/AnecdoteForm'
@@ -26,23 +28,17 @@ const App = () => {
       id: 2
     }
   ])
+  const [notification, setNotification] = useNotification(null)
 
   const match = useMatch('/anecdotes/:id')
   const anecdote = match
     ? anecdotes.find(anecdote => anecdote.id === Number(match.params.id))
     : null
 
-  const [notification, setNotification] = useState(null)
-
-  const notify = (message) => {
-    setNotification(message)
-    setTimeout(() => setNotification(null), 5000)
-  }
-
   const addNew = (anecdote) => {
     anecdote.id = Math.round(Math.random() * 10000)
     setAnecdotes(anecdotes.concat(anecdote))
-    notify(`a new anecdote '${anecdote.content}' created!`)
+    setNotification(`a new anecdote '${anecdote.content}' created!`)
   }
 
   /*const anecdoteById = (id) =>
