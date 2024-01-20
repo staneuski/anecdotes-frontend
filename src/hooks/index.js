@@ -7,7 +7,11 @@ export const useField = (type, name) => {
     setValue(event.target.value)
   }
 
-  return { type, name, value, onChange }
+  const reset = () => {
+    setValue('')
+  }
+
+  return [{ type, name, value, onChange }, reset]
 }
 
 export const useNotification = (initialState) => {

@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom'
 const AnecdoteForm = (props) => {
   const navigate = useNavigate()
 
-  const content = useField('text', 'content')
-  const author = useField('text', 'author')
-  const info = useField('url', 'info')
+  const [content, resetContent] = useField('text', 'content')
+  const [author, resetAuthor] = useField('text', 'author')
+  const [info, resetInfo] = useField('url', 'info')
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -19,9 +19,16 @@ const AnecdoteForm = (props) => {
     navigate('/')
   }
 
+  const handleReset = (event) => {
+    event.preventDefault()
+    resetContent()
+    resetAuthor()
+    resetInfo()
+  }
+
   return (<>
     <h2>create a new anecdote</h2>
-    <form onSubmit={handleSubmit}>
+    <form>
       <div>
         content
         <input {...content} />
@@ -34,7 +41,8 @@ const AnecdoteForm = (props) => {
         url for more info
         <input {...info} />
       </div>
-      <button>create</button>
+      <button onClick={handleSubmit}>create</button>
+      <button onClick={handleReset}>reset</button>
     </form>
   </>)
 }
